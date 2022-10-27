@@ -1,4 +1,4 @@
-import React, { useState,createContext } from "react";
+import React, { useState,createContext, ReactNode } from "react";
 import classNames from "classnames";
 
 // action when selected
@@ -11,7 +11,7 @@ export interface MenuProps {
     mode?: MenuMode;
     style?:  React.CSSProperties;
     onSelect?: SelectCallback;
-    children: any
+    children?: ReactNode
 }
 
 // Menu context type

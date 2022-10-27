@@ -8,12 +8,7 @@ export enum ButtonSize {
 }
 
 // Button Type
-export enum ButtonType {
-    Primary = 'primary',
-    Default = 'default',
-    Danger = 'danger',
-    Link = 'link'
-}
+type ButtonType = 'primary' | 'default' | 'danger' | 'link'
 
 // Type of Button Component
 interface BaseButtonProps {
@@ -46,11 +41,11 @@ const Button: React.FC<ButtonProps> = (props) => {
     const classes = classNames('btn', className, {
         [`btn-${btnType}`]: btnType,
         [`btn-${size}`]: size,
-        'disabled': (btnType === ButtonType.Link) && disabled,
+        'disabled': (btnType === 'link') && disabled,
     })
 
     // Button type is <a> or <button>
-    if(btnType === ButtonType.Link) {
+    if(btnType === 'link') {
         return (
         <a 
           className={classes}
@@ -77,7 +72,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 // default props
 Button.defaultProps = {
     disabled: false,
-    btnType: ButtonType.Default
+    btnType: 'default'
 }
 
 export default Button
