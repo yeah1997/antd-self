@@ -1,11 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
+import { type } from '@testing-library/user-event/dist/type'
 
 // Button Size
-export enum ButtonSize {
-    Large = 'lg',
-    Small = 'sm',
-}
+type ButtonSize = 'lg' | 'sm'
 
 // Button Type
 type ButtonType = 'primary' | 'default' | 'danger' | 'link'
@@ -19,6 +17,7 @@ interface BaseButtonProps {
     children: React.ReactNode,
     href?: string,
 }
+
 // Original Button Type + BaseButtonProps
 type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
 // Original Anchor Type + BaseButtonProps
@@ -26,6 +25,7 @@ type AnchorProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElemen
 // All of props to be "?"
 export type ButtonProps = Partial<NativeButtonProps & AnchorProps>
 
+// Button component
 const Button: React.FC<ButtonProps> = (props) => {
 
     const { btnType,

@@ -5,6 +5,7 @@ import classNames from "classnames";
 type SelectCallback = (selectIndex: number)=> void;
 type MenuMode = 'horizontal' | 'vertical'
 
+// Menu props
 export interface MenuProps {
     defaultIndex?: number;
     className?: string;
@@ -23,6 +24,7 @@ interface IMenuContext {
 // Menu context
 export const MenuContext = createContext<IMenuContext>({index: 0})
 
+// Menu component
 const Menu: React.FC<MenuProps> = (props)=> {
     
     const { defaultIndex,
@@ -32,15 +34,21 @@ const Menu: React.FC<MenuProps> = (props)=> {
             onSelect,
             children } = props
 
+    // active index(state)
     const [currentActive, setActive] = useState(defaultIndex)
 
+    // class
     const classes = classNames('viking-menu', className, {
-        'menu-veritical': mode === 'vertical'
+        'menu-vertical': mode === 'vertical'
     })
 
+    // Menu click action
     const handleClick = (index: number) => {
+        // set active index
         setActive(index)
+        // there is onSelect?
         if(onSelect) {
+            // send action to menu item component
             onSelect(index)
         }
     }
@@ -64,7 +72,6 @@ const Menu: React.FC<MenuProps> = (props)=> {
 Menu.defaultProps = {
     defaultIndex: 0,
     mode: 'horizontal',
-
 }
 
 export default Menu
