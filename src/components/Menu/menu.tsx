@@ -1,5 +1,6 @@
 import React, { useState,createContext, ReactNode } from "react";
 import classNames from "classnames";
+import { MenuItemProps } from "./menuItem";
 
 // action when selected
 type SelectCallback = (selectIndex: number)=> void;
@@ -59,10 +60,28 @@ const Menu: React.FC<MenuProps> = (props)=> {
         onSelect: handleClick
     }
 
+    // return 包装的children
+    const renderChildren = () => {
+        return React.Children.map(children, (child, index) => {
+            // MenuItem of functional component element
+            const childElement = child as React.FunctionComponentElement<MenuItemProps>
+            const { displayName } = childElement.type
+
+            if(displayName === 'MenuItem') {
+                // 返回children, 并且添加属性 index
+                return React.cloneElement(childElement, {
+                    index
+                })
+            }else {
+                console.error('Error')
+            }
+        })
+    }
+
     return (
         <ul className={classes} style={style} data-testid="test-menu">
             <MenuContext.Provider value={passedContext}>
-            {children}
+            {renderChildren()}
             </MenuContext.Provider>
         </ul>
     )

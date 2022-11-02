@@ -18,13 +18,13 @@ const testVerticalProps: MenuProps = {
 const generateMenu = (props: MenuProps) => {
     return (
         <Menu {...props}>
-        <MenuItem index={0}>
+        <MenuItem>
             active
         </MenuItem>
-        <MenuItem index={1} disabled={true}>
+        <MenuItem disabled={true}>
             disabled
         </MenuItem>
-        <MenuItem index={2}>
+        <MenuItem>
             xyz
         </MenuItem>
       </Menu>
