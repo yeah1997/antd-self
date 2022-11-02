@@ -5,26 +5,30 @@ import Button from './components/Button/button';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem'
 
+import SubMenu from './components/Menu/SubMenu';
+
 function App() {
 
   return (
     <div className="App">
       <h1>learn react</h1>
-      <Button autoFocus>hello</Button>
-      <Button btnType='primary' size='lg'>hello</Button>
-      <Button btnType='default' size='sm'>Default</Button>
-      
-      <hr />
 
-      <Menu defaultIndex={0} mode='vertical' onSelect={(index)=> {console.log(index)}} >
-        <MenuItem index={0} disabled={true}>
+      <Menu defaultIndex={'0'} mode="vertical" onSelect={(index) => {alert(index)}}>
+        <MenuItem disabled={true}>
           123
         </MenuItem>
-        <MenuItem index={1}>
-          456
-        </MenuItem>
-        <MenuItem index={3}>
-          456
+
+        <SubMenu title='dropdown'>
+          <MenuItem>
+            456
+          </MenuItem>
+          <MenuItem>
+            789
+          </MenuItem>
+        </SubMenu>
+        
+        <MenuItem>
+          111
         </MenuItem>
       </Menu>
     </div>

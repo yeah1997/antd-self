@@ -5,20 +5,20 @@ import Menu, {MenuProps} from './menu'
 import MenuItem from './menuItem'
 
 const testProps: MenuProps = {
-    defaultIndex: 0,
+    defaultIndex: '0',
     onSelect: jest.fn(),
     className: 'test'
 }
 
 const testVerticalProps: MenuProps = {
-    defaultIndex: 0,
+    defaultIndex: '0',
     mode: 'vertical'
 }
 
 const generateMenu = (props: MenuProps) => {
     return (
         <Menu {...props}>
-        <MenuItem>
+        <MenuItem >
             active
         </MenuItem>
         <MenuItem disabled={true}>
@@ -69,7 +69,7 @@ describe('test Menu and Menu-item component', () => {
         const varticleWrapper = render(generateMenu(testVerticalProps))
         const vaticleElement = varticleWrapper.getByTestId('test-menu')
 
-        expect(vaticleElement).toHaveClass('menu-vertical viking-menu')
+        expect(vaticleElement).toHaveClass('menu-vertical')
         
     })
 })

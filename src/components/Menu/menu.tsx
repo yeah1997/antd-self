@@ -3,27 +3,30 @@ import classNames from "classnames";
 import { MenuItemProps } from "./menuItem";
 
 // action when selected
-type SelectCallback = (selectIndex: number)=> void;
+type SelectCallback = (selectIndex: string)=> void;
 type MenuMode = 'horizontal' | 'vertical'
 
 // Menu props
 export interface MenuProps {
-    defaultIndex?: number;
+    defaultIndex?: string;
     className?: string;
     mode?: MenuMode;
     style?:  React.CSSProperties;
     onSelect?: SelectCallback;
-    children?: ReactNode
+    children?: ReactNode,
+    defaultOpenSubMenus?: string[];
 }
 
 // Menu context type
 interface IMenuContext {
-    index: number;
+    index: string;
     onSelect?: SelectCallback;
+    mode?: MenuMode
+    defaultOpenSubMenus?: string[];
 }
 
 // Menu context
-export const MenuContext = createContext<IMenuContext>({index: 0})
+export const MenuContext = createContext<IMenuContext>({index: '0'})
 
 // Menu component
 const Menu: React.FC<MenuProps> = (props)=> {
@@ -33,6 +36,7 @@ const Menu: React.FC<MenuProps> = (props)=> {
             mode,
             style,
             onSelect,
+            defaultOpenSubMenus,
             children } = props
 
     // active index(state)
@@ -40,11 +44,12 @@ const Menu: React.FC<MenuProps> = (props)=> {
 
     // class
     const classes = classNames('viking-menu', className, {
-        'menu-vertical': mode === 'vertical'
+        'menu-vertical': mode === 'vertical',
+        'menu-horizontal': mode !== 'horizontal'
     })
 
     // Menu click action
-    const handleClick = (index: number) => {
+    const handleClick = (index: string) => {
         // set active index
         setActive(index)
         // there is onSelect?
@@ -52,12 +57,14 @@ const Menu: React.FC<MenuProps> = (props)=> {
             // send action to menu item component
             onSelect(index)
         }
-    }
+    } 
 
     // context data
     const passedContext: IMenuContext = {
-        index: currentActive ? currentActive : 0,
-        onSelect: handleClick
+        index: currentActive ? currentActive : '0',
+        onSelect: handleClick,
+        mode,
+        defaultOpenSubMenus
     }
 
     // return 包装的children
@@ -67,10 +74,10 @@ const Menu: React.FC<MenuProps> = (props)=> {
             const childElement = child as React.FunctionComponentElement<MenuItemProps>
             const { displayName } = childElement.type
 
-            if(displayName === 'MenuItem') {
+            if(displayName === 'MenuItem' || displayName === 'SubMenu') {
                 // 返回children, 并且添加属性 index
                 return React.cloneElement(childElement, {
-                    index
+                    index: index.toString()
                 })
             }else {
                 console.error('Error')
@@ -89,8 +96,9 @@ const Menu: React.FC<MenuProps> = (props)=> {
 
 // default props
 Menu.defaultProps = {
-    defaultIndex: 0,
+    defaultIndex: '0',
     mode: 'horizontal',
+    defaultOpenSubMenus: []
 }
 
 export default Menu
