@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './styles/index.scss'
-import Button from './components/Button/button';
+// import Button from './components/Button/button';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem'
 

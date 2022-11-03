@@ -24,7 +24,9 @@ const SubMenu: React.FC<SubMenuProps> = ({index, title, children, className}) =>
     const [ menuOpen, setOpen ] = useState(false)
 
     const classes = classNames('menu-item submenu-item', className, {
-        'is-active': context.index === index
+        'is-active': context.index === index,
+        'is-opened': menuOpen,
+        'is-vertical': context.mode === 'vertical'
     })
 
     // Click event for SubMeu
@@ -57,7 +59,7 @@ const SubMenu: React.FC<SubMenuProps> = ({index, title, children, className}) =>
     // redner children
     const renderChildren = () => {
         const subMenuClasses = classNames('viking-submenu', {
-            'menu-opended': menuOpen
+            'menu-opened': menuOpen
         })
 
         const childrenComponent = React.Children.map(children, (child, index) => {
