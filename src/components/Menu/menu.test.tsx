@@ -3,7 +3,7 @@ import { fireEvent, render, RenderResult, cleanup, waitFor } from '@testing-libr
 
 import Menu, {MenuProps} from './menu'
 import MenuItem from './menuItem'
-import SubMenu from './SubMenu'
+import SubMenu from './subMenu'
 
 const testProps: MenuProps = {
     defaultIndex: '0',

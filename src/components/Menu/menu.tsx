@@ -20,7 +20,7 @@ export interface MenuProps {
 // Menu context type
 interface IMenuContext {
     index: string;
-    onSelect?: SelectCallback;
+    onSelect?: (selectedIndex: string) => void;
     mode?: MenuMode
     defaultOpenSubMenus?: string[];
 }
@@ -45,7 +45,7 @@ const Menu: React.FC<MenuProps> = (props)=> {
     // class
     const classes = classNames('viking-menu', className, {
         'menu-vertical': mode === 'vertical',
-        'menu-horizontal': mode !== 'horizontal'
+        'menu-horizontal': mode !== 'vertical'
     })
 
     // Menu click action
