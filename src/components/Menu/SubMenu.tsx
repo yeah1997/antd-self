@@ -70,7 +70,7 @@ const SubMenu: React.FC<SubMenuProps> = ({index, title, children, className}) =>
                     index: index.toString()
                 })
             }else {
-                console.error('warning')
+                console.error('Warning: SubMenu has a child which is not a MenuItem component')
             }
         })
 
